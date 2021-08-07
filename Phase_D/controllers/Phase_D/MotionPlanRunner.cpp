@@ -6,7 +6,7 @@
 // Platform: 		MacOS
 // Notes: 			Output file is written with ',' delimiter
 
-#include "z5209697_MTRN4110_PhaseA.hpp"
+#include "MotionPlanRunner.hpp"
 
 /**
  * MotionPlanRunner Constructor
@@ -249,24 +249,3 @@ char MotionPlanRunner::getNextMotion() {
 }
 
 void MotionPlanRunner::setState(std::unique_ptr<RobotState> &state) { mState = std::move(state); }
-
-/**
- * Initialise Robot instance and run robot
- **/ 
-int main(int argc, char **argv) {
-	// create the Robot instance.
-	std::unique_ptr<Robot> robot {std::make_unique<Robot>()};
-	MotionPlanRunner racer{robot};
-
-	// Main loop:
-	// - perform simulation steps until Webots is stopping the controller
-	try {
-		racer.process();
-	} catch (const std::exception &e) {
-		std::cout << e.what() << std::endl;
-		racer.finishRobot();
-		racer.process();
-	}
-
-	return 0;
-}

@@ -1,5 +1,4 @@
-build/release/z5209697_MTRN4110_PhaseA.o: z5209697_MTRN4110_PhaseA.cpp \
-  z5209697_MTRN4110_PhaseA.hpp \
+build/release/Phase_D.o: Phase_D.cpp MotionPlanRunner.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Robot.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Motor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Device.hpp \
