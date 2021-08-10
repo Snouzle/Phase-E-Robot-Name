@@ -1,17 +1,17 @@
 #include "RobotState.hpp"
 
-void InitialState::process(MotionPlanRunner &runner) {
-    runner.printState();
+void InitialState::process(MotionStrategy &runner) {
+    runner.processState();
 
     std::unique_ptr<RobotState> state {std::make_unique<ReadState>()};
     runner.setState(state);
 }
 
 TurningState::TurningState(const double &vd, const double &ad,
-                           MotionPlanRunner &runner):
+                           MotionStrategy &runner):
     RobotState(), mPt{runner.getHeadingAngle()}, mVd{vd}, mAd{ad}, mVp{runner.getLeftMotor()} {}
 
-void TurningState::process(MotionPlanRunner &runner) {
+void TurningState::process(MotionStrategy &runner) {
     double pc {runner.getIMU()[2]};
     double ts {runner.getTimeStep()};
     double pt {0};
@@ -44,7 +44,7 @@ void TurningState::process(MotionPlanRunner &runner) {
     if (abs(vc) < 0.01) {
         auto sensors = runner.getMotorSensors();
         runner.setTargetPosition(sensors[0], sensors[1]);
-        runner.printState();
+        runner.processState();
         std::unique_ptr<RobotState> state {std::make_unique<ReadState>()};
         runner.setState(state);
     } else {
@@ -53,7 +53,7 @@ void TurningState::process(MotionPlanRunner &runner) {
     }
 }
 
-void ReadState::process(MotionPlanRunner &runner) {
+void ReadState::process(MotionStrategy &runner) {
     char motion {runner.getNextMotion()};
     std::unique_ptr<RobotState> state;
     auto motorPositions {runner.getTargetPosition()};
@@ -61,21 +61,21 @@ void ReadState::process(MotionPlanRunner &runner) {
     switch (motion) {
         case (char)Direction::LEFT:
             runner.setTargetPosition(INFINITY, INFINITY);
-            runner.moveRobot(0, 0, MotionPlanRunner::ChangeHeading::LEFT);
+            runner.moveRobot(0, 0, MotionStrategy::ChangeHeading::LEFT);
             state = std::make_unique<TurningState>(0.5*MAX_SPEED, 0.5, runner);
             runner.setState(state);
 			break;
 		case (char)Direction::FORWARD:
             runner.setTargetPosition(motorPositions[0] + FORWARD_RADIANS, motorPositions[1] + FORWARD_RADIANS);
             runner.moveRobot(MAX_SPEED, MAX_SPEED,
-                             MotionPlanRunner::ChangeHeading::FORWARD);
+                             MotionStrategy::ChangeHeading::FORWARD);
             runner.updatePosition();
             state = std::make_unique<RunningState>();
             runner.setState(state);
 			break;
 		case (char)Direction::RIGHT:
             runner.setTargetPosition(INFINITY, INFINITY);
-            runner.moveRobot(0, 0, MotionPlanRunner::ChangeHeading::RIGHT);
+            runner.moveRobot(0, 0, MotionStrategy::ChangeHeading::RIGHT);
             state = std::make_unique<TurningState>(0.5*MAX_SPEED, 0.5, runner);
             runner.setState(state);
 			break;
@@ -88,7 +88,7 @@ void ReadState::process(MotionPlanRunner &runner) {
 	}
 }
 
-void RunningState::process(MotionPlanRunner &runner) {
+void RunningState::process(MotionStrategy &runner) {
     auto motorSensors {runner.getMotorSensors()};
 
     /**
@@ -101,7 +101,7 @@ void RunningState::process(MotionPlanRunner &runner) {
     // Moving forward finishing condition
     if (motorSensors[0] == mPrevLeftSensor && 
         motorSensors[1] == mPrevRightSensor) {
-        runner.printState();
+        runner.processState();
         std::unique_ptr<RobotState> state {std::make_unique<ReadState>()};
         runner.setState(state);
     } else {
@@ -110,7 +110,7 @@ void RunningState::process(MotionPlanRunner &runner) {
     }
 }
 
-FinishedState::FinishedState(MotionPlanRunner &runner): RobotState() {
+FinishedState::FinishedState(MotionStrategy &runner): RobotState() {
     runner.finishRobot();
 }
 

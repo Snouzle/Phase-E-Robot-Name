@@ -1,7 +1,7 @@
 #ifndef ROBOT_STATE
 #define ROBOT_STATE
 
-#include "MotionPlanRunner.hpp"
+#include "MotionStrategy.hpp"
 #include <cmath>
 
 constexpr double KP {20};
@@ -15,7 +15,7 @@ public:
     RobotState() {}
     virtual ~RobotState() {}
 
-    virtual void process(MotionPlanRunner &runner) = 0;
+    virtual void process(MotionStrategy &runner) = 0;
 };
 
 // Initialising Robot state
@@ -23,7 +23,7 @@ class InitialState: public RobotState {
 public:
     InitialState(): RobotState() {}
 
-    virtual void process(MotionPlanRunner &runner);
+    virtual void process(MotionStrategy &runner);
 };
 
 // Reading and processing input
@@ -37,7 +37,7 @@ private:
 public:
     ReadState(): RobotState() {}
 
-    virtual void process(MotionPlanRunner &runner);
+    virtual void process(MotionStrategy &runner);
 };
 
 // Turning left / right state
@@ -47,9 +47,9 @@ private:
            mErrorIntegral{0};
 
 public:
-    TurningState(const double &vd, const double &ad, MotionPlanRunner &runner);
+    TurningState(const double &vd, const double &ad, MotionStrategy &runner);
 
-    virtual void process(MotionPlanRunner &runner);
+    virtual void process(MotionStrategy &runner);
 };
 
 // Moving forward state
@@ -60,15 +60,15 @@ private:
 public:
     RunningState(): RobotState() {}
 
-    virtual void process(MotionPlanRunner &runner);
+    virtual void process(MotionStrategy &runner);
 };
 
 // Robot finished state
 class FinishedState: public RobotState {
 public:
-    FinishedState(MotionPlanRunner &runner);
+    FinishedState(MotionStrategy &runner);
 
-    virtual void process(MotionPlanRunner &runner) {}
+    virtual void process(MotionStrategy &runner) {}
 };
 
 // Returns sign of a double
