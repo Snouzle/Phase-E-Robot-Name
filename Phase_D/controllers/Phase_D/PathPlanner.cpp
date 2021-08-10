@@ -8,10 +8,7 @@
 
 #define ROW 9
 #define TOTAL_CELLS 45
-// All the webots classes are defined in the "webots" namespace
-
-
-
+// All the webots classes are defined in the "webots" namespace 
 // HELPER FUNCTIONS used: 
 
 // Find the paths from BFS done 
@@ -116,10 +113,8 @@ char opp_direction (char curr) {
     } 
 } 
 
-// TODO:: remove this? 
-PathPlanner::PathPlanner(): {}
 
-PathPlanner::getPath() { 
+std::string PathPlanner::getPath() { 
 
     // initialise variables 
     int adj_matrix[TOTAL_CELLS][TOTAL_CELLS] = {0};                     // adjancey matrix  
@@ -137,8 +132,7 @@ PathPlanner::getPath() {
     if (txtfile.is_open()){ 
             while(getline(txtfile, motion_string)){ 
                 // Print the string in the txtfile into console 
-                std::cout << zID << motion_string << "\n";
-                outfile << zID << motion_string << "\n";
+                std::cout << motion_string << "\n";
                 txt_line.insert(txt_line.end(), motion_string); 
             }
             txtfile.close(); 
@@ -260,7 +254,7 @@ PathPlanner::getPath() {
     // Now to find all paths 
     find_paths(paths, path, parent, end); 
     // Print all possible paths into the given MAP format 
-    int path_size = paths.size(); 
+    const int path_size = paths.size(); 
     std::vector<std::string> map_routes[path_size]; 
     std::vector<std::string> plan[path_size]; 
     int turns[path_size] = {0};  
@@ -316,11 +310,9 @@ PathPlanner::getPath() {
     // Print out to terminal here 
     for (int p = 0; p < path_size; p++) { 
         // First, copy and paste the entire MAP into the Map route 
-        std::cout << zID << "Path - " << p+1 << ":" << "\n"; 
-        outfile << zID << "Path - " << p+1 << ":" << "\n"; 
+        std::cout << "Path - " << p+1 << ":" << "\n"; 
         for (int t = 0; t < (int)txt_line.size(); t++) { 
-            std::cout << zID << map_routes[p][t] << "\n"; 
-            outfile << zID << map_routes[p][t] << "\n"; 
+            std::cout << map_routes[p][t] << "\n"; 
         }
     }  
     std::cout << paths.size() << " shortest paths found!" << "\n"; 
@@ -336,7 +328,7 @@ PathPlanner::getPath() {
     
     // Print the map of the shortest path 
     for (int t = 0; t < (int)txt_line.size(); t++) { 
-        std::cout << zID << map_routes[min][t] << "\n"; 
+        std::cout << map_routes[min][t] << "\n"; 
     }
 
     // Return the shortest path as a string 

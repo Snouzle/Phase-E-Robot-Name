@@ -3,6 +3,9 @@ using namespace std;
 
 class PathPlanner
 { 
+    private: 
+        int robot_pos;
+         
     public: 
     string getPath(); 
     
