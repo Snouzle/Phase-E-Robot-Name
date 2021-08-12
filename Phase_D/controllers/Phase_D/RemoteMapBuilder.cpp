@@ -10,7 +10,6 @@ RemoteMapBuilder::RemoteMapBuilder(std::unique_ptr<Robot> &robot):
     setCol(8);
 
     processState();
-    // mMap[getRow()][getCol()] = start;
 }
 
 void RemoteMapBuilder::showMap() {
@@ -84,12 +83,9 @@ void RemoteMapBuilder::updateVisit(const int &pos) {
     deleteUnvisited(pos);
 }
 
-// std::vector<int>::iterator
-// int findUnvisited()
-
 void RemoteMapBuilder::addUnvisited(const int &row, const int &col) {
-    // if ()
     int pos{row*COLS + col};
+    
     if (std::find(mUnvisitedPoints.begin(), mUnvisitedPoints.end(), pos) == mUnvisitedPoints.end())
         mUnvisitedPoints.push_back(row*COLS+col);
 }
