@@ -31,7 +31,6 @@ MotionPlanRunner::MotionPlanRunner(std::unique_ptr<Robot> &robot): MotionStrateg
 
 	setRow(row - '0');
 	setCol(col - '0');
-
 	setHeading(heading);
 
 	// Set up output file

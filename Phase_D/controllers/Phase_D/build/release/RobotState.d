@@ -6,4 +6,5 @@ build/release/RobotState.o: RobotState.cpp RobotState.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/../../c/webots/types.h \
   /Applications/Webots.app/include/controller/cpp/webots/PositionSensor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/DistanceSensor.hpp \
+  /Applications/Webots.app/include/controller/cpp/webots/Keyboard.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/InertialUnit.hpp

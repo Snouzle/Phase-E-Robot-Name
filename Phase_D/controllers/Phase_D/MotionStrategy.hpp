@@ -55,7 +55,7 @@ public:
         FRONT,
         RIGHT
     };
-    
+
 private:
 	std::unique_ptr<Robot> mRobot;
 	std::unique_ptr<RobotState> mState;
@@ -75,12 +75,14 @@ public:
 	void moveRobot(const double &leftVelocity, const double &rightVelocity,
 				   const ChangeHeading &heading);
 
-	std::array<double, DISTANCE_SENSOR_NUMBER> getDistanceSensors();
+	std::array<double, NUM_DIRECTIONS> getDistanceSensors();
 	std::array<char, NUM_DIRECTIONS> getHeadingList();
 	std::array<double, MOTOR_NUMBER> getMotorSensors();
 	void setHeading(const char &heading);
+    void setHeading(const Heading &heading) { mHeading = (int)heading; };
 	char getHeading();
 	double getHeadingAngle();
+    int getHeadingDirection() { return mHeading; }
 	virtual char getNextMotion() = 0;
 	int getRow() { return mRow; }
     void setRow(const int &row) { mRow = row; }

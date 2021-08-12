@@ -34,6 +34,7 @@ private:
 		FORWARD = 'F',
 		RIGHT = 'R'
 	};
+    
 public:
     ReadState(): RobotState() {}
 

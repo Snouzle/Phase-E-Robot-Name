@@ -44,9 +44,11 @@ void TurningState::process(MotionStrategy &runner) {
     if (abs(vc) < 0.01) {
         auto sensors = runner.getMotorSensors();
         runner.setTargetPosition(sensors[0], sensors[1]);
-        runner.processState();
         std::unique_ptr<RobotState> state {std::make_unique<ReadState>()};
         runner.setState(state);
+        runner.setLeftMotor(0);
+        runner.setRightMotor(0);
+        runner.processState();
     } else {
         runner.setLeftMotor(-vc);
         runner.setRightMotor(vc);

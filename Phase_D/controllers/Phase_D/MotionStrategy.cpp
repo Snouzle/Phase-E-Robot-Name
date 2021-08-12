@@ -34,11 +34,11 @@ MotionStrategy::MotionStrategy(std::unique_ptr<Robot> &robot): mRobot{std::move(
 	rightSensor->enable(mTimeStep);
 
 	// Initialise Distance sensors
-	std::array<std::string, DISTANCE_SENSOR_NUMBER> dsNames {
-        "left_sensor", "front_sensor", "right_sensor"
+	std::array<std::string, DISTANCE_SENSOR_NUMBER+1> dsNames {
+        "left_sensor", "front_sensor", "right_sensor", "back_sensor"
     };
 
-	for (int i = 0; i < DISTANCE_SENSOR_NUMBER; i++)
+	for (int i = 0; i < DISTANCE_SENSOR_NUMBER+1; i++)
 		mRobot->getDistanceSensor(dsNames[i])->enable(mTimeStep);
 
 	// Initialise IMU
@@ -128,14 +128,14 @@ void MotionStrategy::moveRobot(const double &leftVelocity, const double &rightVe
 /**
  * Distance Sensors from left to right
  **/ 
-std::array<double, DISTANCE_SENSOR_NUMBER> MotionStrategy::getDistanceSensors() {
-	std::array<std::string, DISTANCE_SENSOR_NUMBER> dsNames {
-        "left_sensor", "front_sensor", "right_sensor"
+std::array<double, NUM_DIRECTIONS> MotionStrategy::getDistanceSensors() {
+	std::array<std::string, NUM_DIRECTIONS> dsNames {
+        "left_sensor", "front_sensor", "right_sensor", "back_sensor"
     };
 
-	std::array<double, DISTANCE_SENSOR_NUMBER> dSensors;
+	std::array<double, NUM_DIRECTIONS> dSensors;
 
-	for (int i = 0; i < DISTANCE_SENSOR_NUMBER; i++)
+	for (int i = 0; i < NUM_DIRECTIONS; i++)
 		dSensors[i] = mRobot->getDistanceSensor(dsNames[i])->getValue();
 
 	return dSensors;
@@ -185,7 +185,7 @@ double MotionStrategy::getHeadingAngle() {
 void MotionStrategy::setState(std::unique_ptr<RobotState> &state) { mState = std::move(state); }
 
 bool MotionStrategy::isWall(const int &direction) {
-    if (direction < (int)Wall::LEFT || direction > (int)Wall::RIGHT) return false;
+    if (direction < (int)Wall::LEFT || direction > DISTANCE_SENSOR_NUMBER) return false;
 
     return getDistanceSensors()[direction] < OBSTACLE_THRESHOLD;
 }
