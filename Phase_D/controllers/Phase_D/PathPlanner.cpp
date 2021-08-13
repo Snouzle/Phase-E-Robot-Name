@@ -4,13 +4,17 @@
 #include <iostream>
 #include <queue>
 #include <algorithm>
-#include "PathPlanner.hpp" 
 
 #define ROW 9
 #define TOTAL_CELLS 45
+
+// USE THIS TO CONVERT ROW & COL to the cell number 
+int cell_conversion(int row, int col) { 
+    return (row*ROW+col); 
+}
+
 // All the webots classes are defined in the "webots" namespace 
 // HELPER FUNCTIONS used: 
-
 // Find the paths from BFS done 
 void find_paths(std::vector<std::vector<int> >& paths, std::vector<int>& path, std::vector<int> parent[], int curr_cell) { 
   // Base Case 
@@ -113,8 +117,9 @@ char opp_direction (char curr) {
     } 
 } 
 
-
-std::string PathPlanner::getPath() { 
+// new_pos = 999 and obstacle = 999 for initial read 
+// if obstacle - put in new position in new_pos 
+std::string getPath(int new_pos, int obstacle) { 
 
     // initialise variables 
     int adj_matrix[TOTAL_CELLS][TOTAL_CELLS] = {0};                     // adjancey matrix  
@@ -123,7 +128,7 @@ std::string PathPlanner::getPath() {
     int end;                                          // end position 
     char direction;                                   // start direction 
     std::string start_pos;                             // string to hold starting position e.g. '00S' 
-    const std::string MAP_FILE = "../../Map.txt";
+    const std::string MAP_FILE = "Map.txt";
     
     std::string motion_string;
     std::fstream txtfile;
@@ -138,7 +143,7 @@ std::string PathPlanner::getPath() {
             txtfile.close(); 
     }
 
-    // Reading the map from the textfile and converting it into ta adjancey matrix 
+    // Reading the map from the textfile and converting it into a adjancey matrix 
     int curr_x; 
     int curr_y; 
     for (int i = 0; i < 5; i++) {
@@ -182,9 +187,6 @@ std::string PathPlanner::getPath() {
     }
 
 
-
-    // TODO:: if argument is set to 'obstacle' we ignore the start position, and feed our own input 
-    // of the robot location 
     // Find the start 'cell' - direction, and destination 'cell' 
     for (int i = 0; i < (int)txt_line.size(); i++) { 
         // Note: find() returns string::npos is letter is not found 
@@ -211,9 +213,24 @@ std::string PathPlanner::getPath() {
         } 
     }
 
+
+    if (new_pos != 999) { 
+        start = new_pos; 
+        // All directions from the obstacle cell cant be accessed   
+        adj_matrix[obstacle][obstacle+1] = 0; 
+        adj_matrix[obstacle+1][obstacle] = 0; 
+        adj_matrix[obstacle][obstacle-1] = 0; 
+        adj_matrix[obstacle-1][obstacle] = 0; 
+        adj_matrix[obstacle][obstacle+9] = 0; 
+        adj_matrix[obstacle+9][obstacle] = 0; 
+        adj_matrix[obstacle][obstacle-9] = 0; 
+        adj_matrix[obstacle-9][obstacle] = 0; 
+    }
+
     // Save the starting position as a string - to add at the front of the path later
     curr_x = start / ROW; 
     curr_y = start % ROW; 
+
     start_pos.append(std::to_string(curr_x)); 
     start_pos.append(std::to_string(curr_y)); 
     std::string s(1, direction);
@@ -331,8 +348,14 @@ std::string PathPlanner::getPath() {
         std::cout << map_routes[min][t] << "\n"; 
     }
 
+    std::string final_plan = ""; 
+    // Print path into a string 
+    for (int i = 0; i < (int)plan[min].size(); i++) { 
+        final_plan += plan[min][i];
+    } 
+
     // Return the shortest path as a string 
-    return plan[min]; 
+    return final_plan; 
 }
 
 
