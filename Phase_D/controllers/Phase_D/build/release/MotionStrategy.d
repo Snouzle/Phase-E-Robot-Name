@@ -1,5 +1,4 @@
-build/release/RobotState.o: RobotState.cpp RobotState.hpp \
-  MotionStrategy.hpp \
+build/release/MotionStrategy.o: MotionStrategy.cpp MotionStrategy.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Robot.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Motor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Device.hpp \
@@ -7,4 +6,5 @@ build/release/RobotState.o: RobotState.cpp RobotState.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/PositionSensor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/DistanceSensor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Keyboard.hpp \
-  /Applications/Webots.app/include/controller/cpp/webots/InertialUnit.hpp
+  /Applications/Webots.app/include/controller/cpp/webots/InertialUnit.hpp \
+  RobotState.hpp

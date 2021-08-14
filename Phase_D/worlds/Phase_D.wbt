@@ -521,10 +521,18 @@ DEF MAZE Group {
 DEF z1234567 E-puck {
   translation -0.650205 -6.40572e-05 -0.329994
   rotation 0 1 0 3.1415
-  controller "z5209697_MTRN4110_PhaseA"
+  controller "Phase_D"
   camera_width 320
   camera_height 240
   turretSlot [
+    DistanceSensor {
+      rotation 0 1 0 -1.57
+      name "back_sensor"
+      lookupTable [
+        0 0 0
+        0.15 1000 0
+      ]
+    }
     DistanceSensor {
       name "right_sensor"
       lookupTable [

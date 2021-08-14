@@ -7,7 +7,49 @@
 // Notes: 			Output file is written with ',' delimiter
 
 #include <iostream>
-#include "MotionPlanRunner.hpp"
+
+#include "Phase_D.hpp"
+
+void PhaseD::setup(std::unique_ptr<Robot> &robot) {
+	int key {-1};
+
+	printInstructions();
+	Keyboard *keyboard = robot->getKeyboard();
+	keyboard->enable(TIME_STEP);
+
+	// Wait for instruction
+	while ((robot->step(TIME_STEP) != -1) && (key < '1' || key > '2'))
+		key = keyboard->getKey();
+
+	findStrategy(key - '0', robot);
+}
+
+void PhaseD::printInstructions() {
+	std::cout << PREFIX << "\tPlease select a command:\n";
+	std::cout << PREFIX << "\t[1]\trun Robot in Normal mode\n";
+	std::cout << PREFIX << "\t[2]\trun Robot in Remote Map Building mode\n";
+
+	std::cout << std::endl;
+}
+
+void PhaseD::findStrategy(const int &key, std::unique_ptr<Robot> &robot) {
+	switch (key) {
+		case 2:
+			motion = std::make_unique<RemoteMapBuilder>(robot);
+			break;
+		default:
+			motion = std::make_unique<MotionPlanRunner>(robot);
+	}
+}
+
+void PhaseD::process() {
+	motion->process();
+}
+
+void PhaseD::finish() {
+	motion->finishRobot();
+	motion->process();
+}
 
 /**
  * Initialise Robot instance and run robot
@@ -15,16 +57,22 @@
 int main(int argc, char **argv) {
 	// create the Robot instance.
 	std::unique_ptr<Robot> robot {std::make_unique<Robot>()};
-	MotionPlanRunner racer{robot};
+	PhaseD controller;
+	// std::unique_ptr<MotionStrategy> racer;
+
+	// racer = std::make_unique<MotionPlanRunner>(robot);
 
 	// Main loop:
 	// - perform simulation steps until Webots is stopping the controller
 	try {
-		racer.process();
+		controller.setup(robot);
+		controller.process();
+		// racer->process();
 	} catch (const std::exception &e) {
 		std::cout << e.what() << std::endl;
-		racer.finishRobot();
-		racer.process();
+		controller.finish();
+		// racer->finishRobot();
+		// racer->process();
 	}
 
 	return 0;
