@@ -7,6 +7,7 @@
 // Notes: 			Output file is written with ',' delimiter
 
 #include "MotionPlanRunner.hpp"
+#include "PathPlanner.cpp" 
 
 /**
  * MotionPlanRunner Constructor
@@ -20,6 +21,11 @@ MotionPlanRunner::MotionPlanRunner(std::unique_ptr<Robot> &robot): MotionStrateg
 	std::getline(fd, motionPlan);
 
 	fd.close();
+
+	// Testing PathPlanner - To use this instead now 
+	std::cout << "Reading in Sasha's Phase B .. " << std::endl; 
+	std::string path_planner = getPath(0, 1); 
+	std::cout << path_planner << std::endl;
 
 	// Print Motion Plan Line
 	mMotionPlan << motionPlan;
