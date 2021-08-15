@@ -1,4 +1,5 @@
 build/release/MotionStrategy.o: MotionStrategy.cpp MotionStrategy.hpp \
+  PathPlanner.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Robot.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Motor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Device.hpp \

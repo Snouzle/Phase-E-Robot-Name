@@ -1,9 +1,13 @@
 #ifndef PHASED_H
 #define PHASED_H
 
+#include <iostream>
+#include <cmath>
+
 #include "MotionPlanRunner.hpp"
 #include "MotionStrategy.hpp"
 #include "RemoteMapBuilder.hpp"
+#include "AutoMapBuilder.hpp"
 
 class PhaseD {
 private:

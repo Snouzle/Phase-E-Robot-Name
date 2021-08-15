@@ -40,8 +40,8 @@
 ### ---- C++ Sources ----
 ### if your program uses several C++ source files:
 ### CXX_SOURCES = my_plugin.cc my_clever_algo.cpp my_graphics.c++
-CXX_SOURCES = Phase_D.cpp MotionStrategy.cpp MotionPlanRunner.cpp \
-			  MapBuilder.cpp RemoteMapBuilder.cpp AutoMapBuilder.cpp RobotState.cpp
+CXX_SOURCES = Phase_D.cpp MotionStrategy.cpp MotionPlanRunner.cpp PathPlanner.cpp \
+			  MapBuilder.cpp RemoteMapBuilder.cpp AutoMapBuilder.cpp RobotState.cpp 
 ###
 ### ---- Compilation options ----
 ### if special compilation flags are necessary:

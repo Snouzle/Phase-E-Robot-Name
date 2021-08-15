@@ -56,10 +56,15 @@ public:
 // Moving forward state
 class RunningState: public RobotState {
 private:
-    double mPrevLeftSensor{0}, mPrevRightSensor{0};
+    double mPrevLeftSensor{0}, mPrevRightSensor{0},
+           mStartLeftSensor, mStartRightSensor,
+           mLeftTarget, mRightTarget;
+
+    bool replan{false};
 
 public:
-    RunningState(): RobotState() {}
+    RunningState(const double &leftSensor, const double &rightSensor,
+                 const int &repeats);
 
     virtual void process(MotionStrategy &runner);
 };

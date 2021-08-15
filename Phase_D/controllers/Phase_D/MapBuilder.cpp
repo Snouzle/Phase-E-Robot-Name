@@ -130,4 +130,53 @@ void MapBuilder::processState() {
         }
     }
 
+    showMap();
+}
+
+std::array<bool, NUM_DIRECTIONS> MapBuilder::findAdjacentUnvisited() {
+    int strCol{getCol() * 4 + 2}, 
+        strRow{getRow() * 2 + 1};
+
+    int pos{getRow() * COLS + getCol()};
+
+    const std::array<int, NUM_DIRECTIONS> neighbours{
+        pos-COLS, pos+1, pos+COLS, pos-1,
+    };
+
+    const std::array<int, NUM_DIRECTIONS> walls {
+        mStringMap[strRow - 1][strCol], mStringMap[strRow][strCol + 2],
+        mStringMap[strRow + 1][strCol], mStringMap[strRow][strCol - 2]
+    };
+
+    std::array<bool, NUM_DIRECTIONS> adjacent;
+
+    for (int i = 0; i < NUM_DIRECTIONS; i++) {
+        if (walls[i] == ' ') {
+            auto iter{std::find(begin(mUnvisitedPoints), end(mUnvisitedPoints), neighbours[i])};
+            adjacent[i] = (iter != mUnvisitedPoints.end());
+        } else adjacent[i] = false;
+    }
+
+    return adjacent;
+}
+
+void MapBuilder::writeStringMap(const std::string &fileName) {
+    std::ofstream fd{fileName, std::ios_base::out | std::ios_base::trunc};
+
+    int minStrCol{minCol * 4}, maxStrCol{maxCol * 4 + 4},
+        minStrRow{minRow * 2}, maxStrRow{maxRow * 2 + 2},
+        width{maxStrCol - minStrCol + 1};
+
+    for (int i = 0, row=minStrRow; i <= 10; i++, row++) {
+        std::string line;
+        if (i == 0 || i == 10) line = " --- --- --- --- --- --- --- --- --- ";
+        else {
+            if (i % 2 == 0) line = "                                     ";
+            else line = "|                                   |";
+            line.replace(1, width-1, mStringMap[row].substr(minStrCol+1, width-1));
+        }
+        fd << line << "\n";
+    }
+
+    fd.close();
 }

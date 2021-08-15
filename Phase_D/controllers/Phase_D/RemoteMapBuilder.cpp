@@ -19,3 +19,18 @@ char RemoteMapBuilder::getNextMotion() {
 
     return '\0';
 }
+
+void RemoteMapBuilder::replan() {
+    std::pair<int, int> posPair{getPreviousPosition()};
+    int row{getRow()}, col{getCol()};
+    int pos{row*COLS + col};
+
+    updateMapPosition(row, col);
+
+    deleteUnvisited(pos);
+
+	setRow(posPair.first);
+	setCol(posPair.second);
+}
+
+int RemoteMapBuilder::getNumRepeat(const char &letter) { return 1; }

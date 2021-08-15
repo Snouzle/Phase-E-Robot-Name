@@ -1,5 +1,5 @@
-build/release/RemoteMapBuilder.o: RemoteMapBuilder.cpp \
-  RemoteMapBuilder.hpp MapBuilder.hpp MotionStrategy.hpp PathPlanner.hpp \
+build/release/MotionPlanRunner.o: MotionPlanRunner.cpp \
+  MotionPlanRunner.hpp MotionStrategy.hpp PathPlanner.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Robot.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Motor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Device.hpp \

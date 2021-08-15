@@ -9,6 +9,7 @@
 #include <cmath>
 #include <map>
 #include <string>
+#include <fstream>
 #include <algorithm>
 #include <iterator>
 
@@ -60,12 +61,8 @@ private:
      
     int minCol{8}, maxCol{8}, minRow{4}, maxRow{4};
 
-    bool isVisited(const int &row, const int &col); 
-    void deleteUnvisited(const int &pos);
-    void visit(const int &row, const int &col);
     void updateVisit(const int &pos);
     void addUnvisited(const int &row, const int &col);
-    void updateMapPosition(const int &row, const int &col);
 
 public:
 	MapBuilder(std::unique_ptr<Robot> &robot);
@@ -74,7 +71,19 @@ public:
 	virtual void processState() override;
 
     void showMap();
+    void updateMapPosition(const int &row, const int &col);
+    bool isVisited(const int &row, const int &col); 
+    void visit(const int &row, const int &col);
+    void deleteUnvisited(const int &pos);
     std::vector<int> getUnvisitedPoints() { return mUnvisitedPoints; }
+    std::array<bool, NUM_DIRECTIONS> findAdjacentUnvisited();
+
+    void writeStringMap(const std::string &fileName);
+
+    int getMinRow() { return minRow; }
+    int getMaxRow() { return maxRow; }
+    int getMinCol() { return minCol; }
+    int getMaxCol() { return maxCol; }
 };
 
 #endif

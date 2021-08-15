@@ -1,6 +1,8 @@
 #ifndef MOSTRAT_H
 #define MOSTRAT_H
 
+#include "PathPlanner.hpp" 
+
 #include <webots/Robot.hpp>
 #include <webots/Motor.hpp>
 #include <webots/PositionSensor.hpp>
@@ -12,6 +14,7 @@
 #include <array>
 #include <iostream>
 #include <iomanip>
+#include <utility>
 
 // Defined Variables
 constexpr double OBSTACLE_THRESHOLD {700.0};
@@ -70,7 +73,9 @@ public:
 	void finishRobot();
 	void process();
 	virtual void processState() = 0;
-    void updatePosition();
+	virtual void replan() = 0;
+	virtual int getNumRepeat(const char &letter) = 0;
+    void updatePosition(const int &repeats);
 
 	void moveRobot(const double &leftVelocity, const double &rightVelocity,
 				   const ChangeHeading &heading);
@@ -107,6 +112,8 @@ public:
 
     int step() { return mRobot->step(mTimeStep); }
     bool isWall(const int &direction);
+
+	std::pair<int, int> getPreviousPosition();
 };
 
 #include "RobotState.hpp"

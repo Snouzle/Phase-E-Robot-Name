@@ -59,6 +59,7 @@ void ReadState::process(MotionStrategy &runner) {
     char motion {runner.getNextMotion()};
     std::unique_ptr<RobotState> state;
     auto motorPositions {runner.getTargetPosition()};
+    int repeats;
 
     switch (motion) {
         case (char)Direction::LEFT:
@@ -68,11 +69,13 @@ void ReadState::process(MotionStrategy &runner) {
             runner.setState(state);
 			break;
 		case (char)Direction::FORWARD:
-            runner.setTargetPosition(motorPositions[0] + FORWARD_RADIANS, motorPositions[1] + FORWARD_RADIANS);
+            repeats = runner.getNumRepeat(motion);
+            runner.setTargetPosition(motorPositions[0] + repeats * FORWARD_RADIANS, 
+                                     motorPositions[1] + repeats * FORWARD_RADIANS);
             runner.moveRobot(MAX_SPEED, MAX_SPEED,
                              MotionStrategy::ChangeHeading::FORWARD);
-            runner.updatePosition();
-            state = std::make_unique<RunningState>();
+            runner.updatePosition(repeats);
+            state = std::make_unique<RunningState>(motorPositions[0], motorPositions[1], repeats);
             runner.setState(state);
 			break;
 		case (char)Direction::RIGHT:
@@ -90,25 +93,41 @@ void ReadState::process(MotionStrategy &runner) {
 	}
 }
 
+RunningState::RunningState(const double &leftSensor, const double &rightSensor,
+                           const int &repeats):
+    RobotState(), mStartLeftSensor{leftSensor}, mStartRightSensor{rightSensor},
+    mLeftTarget{leftSensor + repeats*FORWARD_RADIANS}, 
+    mRightTarget{rightSensor + repeats*FORWARD_RADIANS} {}
+
 void RunningState::process(MotionStrategy &runner) {
     auto motorSensors {runner.getMotorSensors()};
 
-    /**
-    if (there is a wall) {
-        replan()
-        return
-    }
-    **/
+    double frontSensor {runner.getDistanceSensors()[(int)MotionStrategy::Wall::FRONT]};
 
-    // Moving forward finishing condition
-    if (motorSensors[0] == mPrevLeftSensor && 
-        motorSensors[1] == mPrevRightSensor) {
-        runner.processState();
-        std::unique_ptr<RobotState> state {std::make_unique<ReadState>()};
-        runner.setState(state);
+    if (frontSensor < 350) {
+        if (!replan) {
+            mLeftTarget = motorSensors[0] - fmod(motorSensors[0] - mStartLeftSensor, FORWARD_RADIANS);
+            mRightTarget = motorSensors[1] - fmod(motorSensors[1] - mStartRightSensor, FORWARD_RADIANS);
+            runner.setTargetPosition(mLeftTarget, mRightTarget);
+            runner.moveRobot(MAX_SPEED, MAX_SPEED,
+                             MotionStrategy::ChangeHeading::FORWARD);
+            runner.replan();
+            replan = true;
+        }
     } else {
-        mPrevLeftSensor = motorSensors[0];
-        mPrevRightSensor = motorSensors[1];
+        replan = false;
+        // Moving forward finishing condition
+        if ((motorSensors[0] - mLeftTarget < 0.1) && 
+            (motorSensors[1] - mPrevRightSensor < 0.1) &&
+            (motorSensors[0] == mPrevLeftSensor) &&
+            (motorSensors[1] == mPrevRightSensor)) {
+            runner.processState();
+            std::unique_ptr<RobotState> state {std::make_unique<ReadState>()};
+            runner.setState(state);
+        } else {
+            mPrevLeftSensor = motorSensors[0];
+            mPrevRightSensor = motorSensors[1];
+        }
     }
 }
 

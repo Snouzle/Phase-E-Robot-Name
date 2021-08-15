@@ -1,12 +1,4 @@
-#include <fstream>
-#include <vector> 
-#include <string> 
-#include <iostream>
-#include <queue>
-#include <algorithm>
-
-#define ROW 9
-#define TOTAL_CELLS 45
+#include "PathPlanner.hpp"
 
 // USE THIS TO CONVERT ROW & COL to the cell number 
 int cell_conversion(int row, int col) { 
@@ -34,7 +26,7 @@ void find_paths(std::vector<std::vector<int> >& paths, std::vector<int>& path, s
         path.pop_back(); 
     
     } 
-} 
+}
 
 // Find if Left or Right turn was made 
 char left_or_right(std::vector<std::string> route[], int p, int next_tile, int curr_tile, char curr_direction) { 
@@ -119,16 +111,17 @@ char opp_direction (char curr) {
 
 // new_pos = 999 and obstacle = 999 for initial read 
 // if obstacle - put in new position in new_pos 
-std::string getPath(int new_pos, int obstacle) { 
+std::string getPath(int new_pos, int obstacle, char heading, const std::string &map_file, 
+                    const std::vector<int> &endpoints) { 
 
     // initialise variables 
-    int adj_matrix[TOTAL_CELLS][TOTAL_CELLS] = {0};                     // adjancey matrix  
+    int adj_matrix[TOTAL_CELLS][TOTAL_CELLS]{0};                     // adjancey matrix  
     std::vector<std::string> txt_line;                // Map strings 
     int start;                                        // start position 
     int end;                                          // end position 
-    char direction;                                   // start direction 
+    char direction = heading;                                   // start direction 
     std::string start_pos;                             // string to hold starting position e.g. '00S' 
-    const std::string MAP_FILE = "Map.txt";
+    const std::string MAP_FILE = map_file;
     
     std::string motion_string;
     std::fstream txtfile;
@@ -195,27 +188,30 @@ std::string getPath(int new_pos, int obstacle) {
         std::size_t west = txt_line[i].find('<');     
         std::size_t east = txt_line[i].find('>'); 
         std::size_t dest = txt_line[i].find('x'); 
-    
-        if (south != std::string::npos) { 
-            start = (i/2)*ROW + south/4; 
-            direction = 'S'; 
-        } else if (north != std::string::npos) { 
-            start = (i/2)*ROW + north/4;
-            direction = 'N';  
-        } else if (west != std::string::npos) { 
-            start = (i/2)*ROW + west/4;
-            direction = 'W';  
-        } else if (east != std::string::npos) { 
-            start = (i/2)*ROW + east/4;
-            direction = 'E';  
+        if (direction == ' ') {
+            if (south != std::string::npos) { 
+                start = (i/2)*ROW + south/4; 
+                direction = 'S'; 
+            } else if (north != std::string::npos) { 
+                start = (i/2)*ROW + north/4;
+                direction = 'N';  
+            } else if (west != std::string::npos) { 
+                start = (i/2)*ROW + west/4;
+                direction = 'W';  
+            } else if (east != std::string::npos) { 
+                start = (i/2)*ROW + east/4;
+                direction = 'E';  
+            }
         } else if (dest != std::string::npos) { 
             end = (i/2)*ROW + dest/4; 
         } 
     }
 
 
-    if (new_pos != 999) { 
+    if (new_pos != -1) { 
         start = new_pos; 
+    } 
+    if (obstacle != -1) {
         // All directions from the obstacle cell cant be accessed   
         adj_matrix[obstacle][obstacle+1] = 0; 
         adj_matrix[obstacle+1][obstacle] = 0; 
@@ -268,13 +264,25 @@ std::string getPath(int new_pos, int obstacle) {
         } 
     }
 
+    if (!endpoints.empty()) {
+        int minDistance = dist[endpoints[0]];
+        int minPoint = endpoints[0];
+        for (const int &point : endpoints) {
+            if (dist[point] < minDistance) {
+                minDistance = dist[point];
+                minPoint = point;
+            }
+        }
+        end = minPoint;
+    }
+
     // Now to find all paths 
     find_paths(paths, path, parent, end); 
     // Print all possible paths into the given MAP format 
     const int path_size = paths.size(); 
     std::vector<std::string> map_routes[path_size]; 
     std::vector<std::string> plan[path_size]; 
-    int turns[path_size] = {0};  
+    std::vector<int> turns{path_size, 0};  
 
     char curr_direction = direction; 
     char new_direction; 
@@ -357,7 +365,3 @@ std::string getPath(int new_pos, int obstacle) {
     // Return the shortest path as a string 
     return final_plan; 
 }
-
-
-
-

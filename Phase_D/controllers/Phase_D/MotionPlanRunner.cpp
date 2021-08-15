@@ -7,29 +7,28 @@
 // Notes: 			Output file is written with ',' delimiter
 
 #include "MotionPlanRunner.hpp"
-#include "PathPlanner.cpp" 
 
 /**
  * MotionPlanRunner Constructor
  **/
 MotionPlanRunner::MotionPlanRunner(std::unique_ptr<Robot> &robot): MotionStrategy{robot} {
 	// Read Motion plan from file
-	std::cout << PREFIX << "Reading in motion plan from " << MOTION_PLAN_FILE_NAME 
-			  << "..." << std::endl;
-	std::ifstream fd {MOTION_PLAN_FILE_NAME};
-	std::string motionPlan;
-	std::getline(fd, motionPlan);
+	// std::cout << PREFIX << "Reading in motion plan from " << MOTION_PLAN_FILE_NAME 
+	// 		  << "..." << std::endl;
+	// std::ifstream fd {MOTION_PLAN_FILE_NAME};
+	// std::string motionPlan;
+	// std::getline(fd, motionPlan);
 
-	fd.close();
+	// fd.close();
 
 	// Testing PathPlanner - To use this instead now 
 	std::cout << "Reading in Sasha's Phase B .. " << std::endl; 
-	std::string path_planner = getPath(0, 1); 
+	std::string path_planner = getPath(); 
 	std::cout << path_planner << std::endl;
 
 	// Print Motion Plan Line
-	mMotionPlan << motionPlan;
-	std::cout << PREFIX << "Motion Plan: " << motionPlan << std::endl;
+	mMotionPlan << path_planner;
+	std::cout << PREFIX << "Motion Plan: " << path_planner << std::endl;
 	std::cout << PREFIX << "Motion plan read in!" << std::endl;
 
 	char heading, row, col;
@@ -53,18 +52,17 @@ MotionPlanRunner::~MotionPlanRunner() {}
 void MotionPlanRunner::processState() {
 	std::ofstream ofd {MOTION_EXECUTION_FILE_NAME, std::ios_base::app | std::ios_base::out};
 	int row{getRow()}, col{getCol()};
-	double tStep{getTimeStep()};
 	char heading{getHeading()};
 
 	// Print status to console
 	std::cout << PREFIX << "Step: " << std::setfill('0') << std::setw(3)
-	 		  << tStep << ", ";
+	 		  << getStep() << ", ";
 
 	std::cout << "Row: " << row << ", Column: " << col << ", Heading: "
 				<< heading << std::flush;
 
 	// Print status to output file
-	ofd << tStep << "," << row << "," << col << "," << heading << std::flush;
+	ofd << getStep() << "," << row << "," << col << "," << heading << std::flush;
 
 	char wall;
 
@@ -91,4 +89,33 @@ char MotionPlanRunner::getNextMotion() {
 	char motion;
 	mMotionPlan >> motion;
 	return motion; 
+}
+
+void MotionPlanRunner::replan() {
+	std::pair<int, int> posPair{getPreviousPosition()};
+	int pos = posPair.first * ROW + posPair.second;
+	int obstacle = getRow() * ROW + getCol();
+
+	std::string newPlan = getPath(pos, obstacle, getHeading(), "Map.txt");
+	mMotionPlan.str(newPlan.substr(3));
+	mMotionPlan.clear();
+	std::cout << newPlan.substr(3) << std::endl;
+	setRow(posPair.first);
+	setCol(posPair.second);
+}
+
+int MotionPlanRunner::getNumRepeat(const char &letter) {
+	mMotionPlan.putback(letter);
+    int repeats = 0;
+    char a;
+    mMotionPlan >> a;
+
+    while ((!mMotionPlan.eof()) && (a == letter)) {
+		mMotionPlan >> a;
+        repeats++;
+    }
+
+	if (!mMotionPlan.eof()) mMotionPlan.putback(a);
+
+	return repeats;
 }

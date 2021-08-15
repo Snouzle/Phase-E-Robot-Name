@@ -10,6 +10,8 @@ public:
     virtual ~RemoteMapBuilder() {}
 
     virtual char getNextMotion() override;
+    virtual void replan() override;
+    virtual int getNumRepeat(const char &letter) override;
 };
 
 #endif

@@ -1,5 +1,5 @@
-build/release/RemoteMapBuilder.o: RemoteMapBuilder.cpp \
-  RemoteMapBuilder.hpp MapBuilder.hpp MotionStrategy.hpp PathPlanner.hpp \
+build/release/RobotState.o: RobotState.cpp RobotState.hpp \
+  MotionStrategy.hpp PathPlanner.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Robot.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Motor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Device.hpp \
@@ -7,5 +7,4 @@ build/release/RemoteMapBuilder.o: RemoteMapBuilder.cpp \
   /Applications/Webots.app/include/controller/cpp/webots/PositionSensor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/DistanceSensor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Keyboard.hpp \
-  /Applications/Webots.app/include/controller/cpp/webots/InertialUnit.hpp \
-  RobotState.hpp
+  /Applications/Webots.app/include/controller/cpp/webots/InertialUnit.hpp
