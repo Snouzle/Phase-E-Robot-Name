@@ -4,7 +4,7 @@ AutoMapBuilder::AutoMapBuilder(std::unique_ptr<Robot> &robot):
     MapBuilder{robot} {}
 
 char AutoMapBuilder::getNextMotion() {
-    if (getUnvisitedPoints().empty()) return '\0';
+    // if (getUnvisitedPoints().empty()) return '\0';
 
     char move;
     mMotionPlan >> move;
@@ -33,13 +33,18 @@ void AutoMapBuilder::planPath(const int &currPoint, const int &obstacle) {
 
     writeStringMap(BUILD_OUT_FILE);
 
+    if (points.empty()) {
+        mMotionPlan.str("");
+        mMotionPlan.clear();
+        return;
+    }
+
     for (auto &point : points) {
         int row {point / (COLS)};
         int col {point % (COLS)};
         int tPoint {(row-getMinRow()) * ROW + col-getMinCol()};
         transformedPoints.push_back(tPoint);
     }
-
     std::string newPlan = getPath(currPoint, obstacle, getHeading(), BUILD_OUT_FILE, transformedPoints);
     mMotionPlan.str(newPlan.substr(3));
     mMotionPlan.clear();
@@ -68,12 +73,14 @@ void AutoMapBuilder::replan() {
         setRow(posPair.first);
 	    setCol(posPair.second);
         planPath(pathPos, obstacle);
+        writeWall(posPair.first, posPair.second, getHeadingDirection());
     } else {
         int pos{row*COLS + col};
         updateMapPosition(row, col);
         deleteUnvisited(pos);
         setRow(posPair.first);
 	    setCol(posPair.second);
+        writeWall(posPair.first, posPair.second, getHeadingDirection());
     }
 }
 

@@ -59,12 +59,18 @@ public:
         RIGHT
     };
 
+	enum class Trajectory {
+		CONTROLLER = 0,
+		BANG_BANG
+	};
+
 private:
 	std::unique_ptr<Robot> mRobot;
 	std::unique_ptr<RobotState> mState;
 	const int mTimeStep;
 	int mStep{0}, mRow{0}, mCol{0}, mHeading;
 	double mLeftMotorTarget{0.0}, mRightMotorTarget{0.0};
+	Trajectory mTrajectory{Trajectory::CONTROLLER};
 	
 public:
 	MotionStrategy(std::unique_ptr<Robot> &robot);
@@ -114,6 +120,8 @@ public:
     bool isWall(const int &direction);
 
 	std::pair<int, int> getPreviousPosition();
+	void setTrajectory(const Trajectory &trajectory) { mTrajectory = trajectory; }
+	Trajectory getTrajectory() { return mTrajectory; }
 };
 
 #include "RobotState.hpp"

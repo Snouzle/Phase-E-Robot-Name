@@ -15,7 +15,9 @@ private:
     // Path Planning Class
 
     void printInstructions();
+    void printTrajectoryInstructions();
     void findStrategy(const int &key, std::unique_ptr<Robot> &robot);
+    void setTrajectory(const int &key);
 
 public:
     PhaseD() {}

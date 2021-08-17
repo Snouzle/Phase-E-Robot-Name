@@ -29,8 +29,22 @@ void RemoteMapBuilder::replan() {
 
     deleteUnvisited(pos);
 
-	setRow(posPair.first);
+    setRow(posPair.first);
 	setCol(posPair.second);
+
+    writeWall(posPair.first, posPair.second, getHeadingDirection());
+
+    // int tempHeading {(i + getHeadingDirection() - 1)};
+    // if (tempHeading < 0) tempHeading += 4;
+    // tempHeading = tempHeading % 4;
+
+    // if (tempHeading % 2 == 0) {
+    //     std::string tmp{mStringMap[strRow+tempHeading-1]};
+    //     tmp.replace(strCol-1, 3, "---");
+    //     mStringMap[strRow+tempHeading-1] = tmp;
+    // } else {
+    //     mStringMap[strRow][strCol + 4 - 2 * tempHeading] = '|';
+    // }
 }
 
 int RemoteMapBuilder::getNumRepeat(const char &letter) { return 1; }

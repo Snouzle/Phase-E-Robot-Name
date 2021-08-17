@@ -79,6 +79,7 @@ public:
     std::array<bool, NUM_DIRECTIONS> findAdjacentUnvisited();
 
     void writeStringMap(const std::string &fileName);
+    void writeWall(const int &row, const int &col, const int &heading);
 
     int getMinRow() { return minRow; }
     int getMaxRow() { return maxRow; }

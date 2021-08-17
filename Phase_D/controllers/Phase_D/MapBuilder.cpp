@@ -98,8 +98,7 @@ void MapBuilder::updateMapPosition(const int &row, const int &col) {
 }
 
 void MapBuilder::processState() {
-    int row{getRow()}, col{getCol()},
-        strRow{row * 2 + 1}, strCol{col * 4 + 2};
+    int row{getRow()}, col{getCol()};
         
     updateMapPosition(row, col);
 
@@ -120,17 +119,30 @@ void MapBuilder::processState() {
                 addUnvisited(unvisitedRow, unvisitedCol);
             }
         } else {
-            if (tempHeading % 2 == 0) {
-                std::string tmp{mStringMap[strRow+tempHeading-1]};
-                tmp.replace(strCol-1, 3, "---");
-                mStringMap[strRow+tempHeading-1] = tmp;
-            } else {
-                mStringMap[strRow][strCol + 4 - 2 * tempHeading] = '|';
-            }
+            writeWall(row, col, tempHeading);
+            // if (tempHeading % 2 == 0) {
+            //     std::string tmp{mStringMap[strRow+tempHeading-1]};
+            //     tmp.replace(strCol-1, 3, "---");
+            //     mStringMap[strRow+tempHeading-1] = tmp;
+            // } else {
+            //     mStringMap[strRow][strCol + 4 - 2 * tempHeading] = '|';
+            // }
         }
     }
 
     showMap();
+}
+
+void MapBuilder::writeWall(const int &row, const int &col, const int &heading) {
+    int strRow{row * 2 + 1}, strCol{col * 4 + 2};
+
+    if (heading % 2 == 0) {
+        std::string tmp{mStringMap[strRow+heading-1]};
+        tmp.replace(strCol-1, 3, "---");
+        mStringMap[strRow+heading-1] = tmp;
+    } else {
+        mStringMap[strRow][strCol + 4 - 2 * heading] = '|';
+    }
 }
 
 std::array<bool, NUM_DIRECTIONS> MapBuilder::findAdjacentUnvisited() {

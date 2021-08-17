@@ -19,7 +19,15 @@ void PhaseD::setup(std::unique_ptr<Robot> &robot) {
 	while ((robot->step(TIME_STEP) != -1) && (key < '1' || key > '3'))
 		key = keyboard->getKey();
 
-	findStrategy(key - '0', robot);
+	int strat = key;
+	key = -1;
+	printTrajectoryInstructions();
+
+	while ((robot->step(TIME_STEP) != -1) && (key < '1' || key > '2'))
+		key = keyboard->getKey();
+
+	findStrategy(strat - '0', robot);
+	setTrajectory(key - '0');
 }
 
 void PhaseD::printInstructions() {
@@ -31,6 +39,13 @@ void PhaseD::printInstructions() {
 	std::cout << std::endl;
 }
 
+void PhaseD::printTrajectoryInstructions() {
+	std::cout << PREFIX << "\tPlease select a command:\n";
+	std::cout << PREFIX << "\t[1]\trun Robot with Feedback Controller\n";
+	std::cout << PREFIX << "\t[2]\trun Robot with Bang Bang Trajectory\n";
+
+	std::cout << std::endl;
+}
 void PhaseD::findStrategy(const int &key, std::unique_ptr<Robot> &robot) {
 	switch (key) {
 		case 2:
@@ -41,6 +56,16 @@ void PhaseD::findStrategy(const int &key, std::unique_ptr<Robot> &robot) {
 			break;
 		default:
 			motion = std::make_unique<MotionPlanRunner>(robot);
+	}
+}
+
+void PhaseD::setTrajectory(const int &key) {
+	switch (key) {
+		case 1:
+			motion->setTrajectory(MotionStrategy::Trajectory::CONTROLLER);
+			break;
+		default:
+			motion->setTrajectory(MotionStrategy::Trajectory::BANG_BANG);
 	}
 }
 
