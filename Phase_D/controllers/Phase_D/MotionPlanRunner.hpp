@@ -23,6 +23,8 @@ public:
 
 	virtual void processState() override;
 	virtual char getNextMotion() override;
+	virtual void replan() override;
+	virtual int getNumRepeat(const char &letter) override;
 };
 
 #endif

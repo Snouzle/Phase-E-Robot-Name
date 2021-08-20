@@ -1,9 +1,13 @@
 #ifndef PHASED_H
 #define PHASED_H
 
+#include <iostream>
+#include <cmath>
+
 #include "MotionPlanRunner.hpp"
 #include "MotionStrategy.hpp"
 #include "RemoteMapBuilder.hpp"
+#include "AutoMapBuilder.hpp"
 
 class PhaseD {
 private:
@@ -11,7 +15,9 @@ private:
     // Path Planning Class
 
     void printInstructions();
+    void printTrajectoryInstructions();
     void findStrategy(const int &key, std::unique_ptr<Robot> &robot);
+    void setTrajectory(const int &key);
 
 public:
     PhaseD() {}

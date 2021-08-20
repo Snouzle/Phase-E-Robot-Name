@@ -70,19 +70,19 @@ void MotionStrategy::process() {
  * Update the robot's position (row and column) depending on
  * heading direction
  **/ 
-void MotionStrategy::updatePosition() {
+void MotionStrategy::updatePosition(const int &repeats=1) {
 	switch (mHeading) {
 		case (int)Heading::NORTH:
-			mRow--;
+			mRow -= repeats;
 			break;
 		case (int)Heading::SOUTH:
-			mRow++;
+			mRow += repeats;
 			break;
 		case (int)Heading::EAST:
-			mCol++;
+			mCol += repeats;
 			break;
 		case (int)Heading::WEST:
-			mCol--;
+			mCol -= repeats;
 			break;
 		default:
 			break;
@@ -188,4 +188,27 @@ bool MotionStrategy::isWall(const int &direction) {
     if (direction < (int)Wall::LEFT || direction > DISTANCE_SENSOR_NUMBER) return false;
 
     return getDistanceSensors()[direction] < OBSTACLE_THRESHOLD;
+}
+
+std::pair<int, int> MotionStrategy::getPreviousPosition() {
+	std::pair<int, int> pair{mRow, mCol};
+
+	switch (mHeading) {
+		case (int)Heading::NORTH:
+			pair.first++;
+			break;
+		case (int)Heading::SOUTH:
+			pair.first--;
+			break;
+		case (int)Heading::EAST:
+			pair.second--;
+			break;
+		case (int)Heading::WEST:
+			pair.second++;
+			break;
+		default:
+			break;
+	}
+
+	return pair;
 }

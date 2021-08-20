@@ -56,10 +56,20 @@ public:
 // Moving forward state
 class RunningState: public RobotState {
 private:
-    double mPrevLeftSensor{0}, mPrevRightSensor{0};
+    double mPrevLeftSensor{0}, mPrevRightSensor{0},
+           mStartLeftSensor, mStartRightSensor,
+           mLeftTarget, mRightTarget;
+
+    bool replan{false};
+    float mT{0.0}, mAMax{30.0};
+    std::array<float, 4> times;
+
+    void bangBang(MotionStrategy &runner);
+    void webotsController(MotionStrategy &runner);
 
 public:
-    RunningState(): RobotState() {}
+    RunningState(const double &leftSensor, const double &rightSensor,
+                 const int &repeats);
 
     virtual void process(MotionStrategy &runner);
 };

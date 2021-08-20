@@ -1,5 +1,5 @@
 build/release/MotionPlanRunner.o: MotionPlanRunner.cpp \
-  MotionPlanRunner.hpp MotionStrategy.hpp \
+  MotionPlanRunner.hpp MotionStrategy.hpp PathPlanner.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Robot.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Motor.hpp \
   /Applications/Webots.app/include/controller/cpp/webots/Device.hpp \

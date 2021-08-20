@@ -1,6 +1,8 @@
 #ifndef MOSTRAT_H
 #define MOSTRAT_H
 
+#include "PathPlanner.hpp" 
+
 #include <webots/Robot.hpp>
 #include <webots/Motor.hpp>
 #include <webots/PositionSensor.hpp>
@@ -12,6 +14,7 @@
 #include <array>
 #include <iostream>
 #include <iomanip>
+#include <utility>
 
 // Defined Variables
 constexpr double OBSTACLE_THRESHOLD {700.0};
@@ -56,12 +59,18 @@ public:
         RIGHT
     };
 
+	enum class Trajectory {
+		CONTROLLER = 0,
+		BANG_BANG
+	};
+
 private:
 	std::unique_ptr<Robot> mRobot;
 	std::unique_ptr<RobotState> mState;
 	const int mTimeStep;
 	int mStep{0}, mRow{0}, mCol{0}, mHeading;
 	double mLeftMotorTarget{0.0}, mRightMotorTarget{0.0};
+	Trajectory mTrajectory{Trajectory::CONTROLLER};
 	
 public:
 	MotionStrategy(std::unique_ptr<Robot> &robot);
@@ -70,7 +79,9 @@ public:
 	void finishRobot();
 	void process();
 	virtual void processState() = 0;
-    void updatePosition();
+	virtual void replan() = 0;
+	virtual int getNumRepeat(const char &letter) = 0;
+    void updatePosition(const int &repeats);
 
 	void moveRobot(const double &leftVelocity, const double &rightVelocity,
 				   const ChangeHeading &heading);
@@ -107,6 +118,10 @@ public:
 
     int step() { return mRobot->step(mTimeStep); }
     bool isWall(const int &direction);
+
+	std::pair<int, int> getPreviousPosition();
+	void setTrajectory(const Trajectory &trajectory) { mTrajectory = trajectory; }
+	Trajectory getTrajectory() { return mTrajectory; }
 };
 
 #include "RobotState.hpp"
