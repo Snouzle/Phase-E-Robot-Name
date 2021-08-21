@@ -8,7 +8,7 @@
 
 class AutoMapBuilder: public MapBuilder {
 private:
-    const std::string BUILD_OUT_FILE{"AutoMap.txt"};
+    const std::string BUILD_OUT_FILE{"../../AutoMap.txt"};
     std::stringstream mMotionPlan;
     bool runningPlan{false};
 
