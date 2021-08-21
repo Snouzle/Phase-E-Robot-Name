@@ -1,0 +1,769 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 1 0 0 -1.5707996938995747
+  position 0 2.5 0
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2.1445 1.4855
+  floorTileSize 0.33 0.33
+}
+DEF MAZE Group {
+  children [
+    DEF cornerStone Solid {
+      translation -0.7424999999999818 0.032499426203888925 -0.412499999999981
+      rotation 0.045529828185433746 0.9931224116315222 -0.10786524120676769 -6.660903439743546e-16
+      children [
+        DEF cornerMarker Transform {
+          translation 0 0.0325 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.333333 1 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.001
+                radius 0.02
+              }
+            }
+          ]
+        }
+        DEF cornerMarkerInner Transform {
+          translation 0.01 0.033 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.001
+                radius 0.005
+              }
+            }
+          ]
+        }
+        DEF cornerStone Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.015 0.065 0.015
+          }
+        }
+      ]
+      name "solid(4)"
+      boundingObject USE cornerStone
+      physics Physics {
+        density 100
+      }
+      linearVelocity -1.7583777566633692e-17 -6.944471968032124e-10 -1.4732172304342365e-16
+      angularVelocity -4.79785231039394e-15 -2.522299637430643e-17 6.996867952657832e-16
+    }
+    DEF cornerStone Solid {
+      translation 0.7425000000000183 0.032499426203888925 -0.412499999999981
+      rotation 0.045529828185433746 0.9931224116315222 -0.10786524120676769 -6.660903439743546e-16
+      children [
+        DEF cornerMarker Transform {
+          translation 0 0.0325 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.001
+                radius 0.02
+              }
+            }
+          ]
+        }
+        DEF cornerMarkerInner Transform {
+          translation 0 0.033 0.01
+          children [
+            Shape {
+              appearance PBRAppearance {
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.001
+                radius 0.005
+              }
+            }
+          ]
+        }
+        DEF cornerStone Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.015 0.065 0.015
+          }
+        }
+      ]
+      name "solid(5)"
+      boundingObject USE cornerStone
+      physics Physics {
+        density 100
+      }
+      linearVelocity -1.7583777566633692e-17 -6.944471968032124e-10 -1.4732172304342365e-16
+      angularVelocity -4.79785231039394e-15 -2.522299637430643e-17 6.996867952657832e-16
+    }
+    DEF cornerStone Solid {
+      translation 0.7425000000000183 0.032499426203888925 0.41250000000001896
+      rotation 0.045529828185433746 0.9931224116315222 -0.10786524120676769 -6.660903439743546e-16
+      children [
+        DEF cornerMarker Transform {
+          translation 0 0.0325 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.001
+                radius 0.02
+              }
+            }
+          ]
+        }
+        DEF cornerMarkerInner Transform {
+          translation -0.01 0.033 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.001
+                radius 0.005
+              }
+            }
+          ]
+        }
+        DEF cornerStone Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.015 0.065 0.015
+          }
+        }
+      ]
+      name "solid(6)"
+      boundingObject USE cornerStone
+      physics Physics {
+        density 100
+      }
+      linearVelocity -1.7583777566633692e-17 -6.944471968032124e-10 -1.4732172304342365e-16
+      angularVelocity -4.79785231039394e-15 -2.522299637430643e-17 6.996867952657832e-16
+    }
+    DEF cornerStone Solid {
+      translation -0.7424999999999818 0.032499426203888925 0.41250000000001896
+      rotation 0.045529828185433746 0.9931224116315222 -0.10786524120676769 -6.660903439743546e-16
+      children [
+        DEF cornerMarker Transform {
+          translation 0 0.0325 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.001
+                radius 0.02
+              }
+            }
+          ]
+        }
+        DEF cornerMarkerInner Transform {
+          translation 0 0.033 -0.01
+          children [
+            Shape {
+              appearance PBRAppearance {
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.001
+                radius 0.005
+              }
+            }
+          ]
+        }
+        DEF cornerStone Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.015 0.065 0.015
+          }
+        }
+      ]
+      name "solid(7)"
+      boundingObject USE cornerStone
+      physics Physics {
+        density 100
+      }
+      linearVelocity -1.7583777566633692e-17 -6.944471968032124e-10 -1.4732172304342365e-16
+      angularVelocity -4.79785231039394e-15 -2.522299637430643e-17 6.996867952657832e-16
+    }
+    DEF hWall Solid {
+      translation 6.200113908403535e-13 0.03244415050468938 -0.4124999997715785
+      rotation -2.1792068451316657e-08 0.9999999999999997 -2.673888162997648e-10 1.189117793601386e-08
+      children [
+        DEF hWall Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            roughness 0.3
+          }
+          geometry Box {
+            size 1.46 0.065 0.015
+          }
+        }
+      ]
+      name "solid(1)"
+      boundingObject USE hWall
+      physics Physics {
+        density 100
+      }
+      linearVelocity -1.1419381007365515e-18 -6.756012334361587e-08 6.522728316924585e-17
+      angularVelocity 2.1031673374378124e-15 -3.700114273106982e-18 1.4022267239663137e-16
+    }
+    DEF hWall Solid {
+      translation 6.200113908403535e-13 0.03244415050468938 0.4125000002284215
+      rotation -2.1792068451316657e-08 0.9999999999999997 -2.673888162997648e-10 1.189117793601386e-08
+      children [
+        DEF hWall Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            roughness 0.3
+          }
+          geometry Box {
+            size 1.46 0.065 0.015
+          }
+        }
+      ]
+      boundingObject USE hWall
+      physics Physics {
+        density 100
+      }
+      linearVelocity -1.1419381007365515e-18 -6.756012334361587e-08 6.522728316924585e-17
+      angularVelocity 2.1031673374378124e-15 -3.700114273106982e-18 1.4022267239663137e-16
+    }
+    DEF vWall Solid {
+      translation -0.7424999999263407 0.032469397538610605 4.0750943511482493e-13
+      rotation -1.0482658842757985e-09 1 8.199795642068303e-09 -6.782941677951298e-09
+      children [
+        DEF vWall Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 0.3
+          }
+          geometry Box {
+            size 0.015 0.065 0.8
+          }
+        }
+      ]
+      name "solid(2)"
+      boundingObject USE vWall
+      physics Physics {
+        density 100
+      }
+      linearVelocity 1.6858188568476223e-16 -3.7027447729015593e-08 9.4854266002613e-18
+      angularVelocity 4.2420844875637816e-16 2.1505677420842664e-17 -4.677906416314174e-15
+    }
+    DEF vWall Solid {
+      translation 0.7425000000736593 0.032469397538610605 4.0750943511482493e-13
+      rotation -1.0482658842757985e-09 1 8.199795642068303e-09 -6.782941677951298e-09
+      children [
+        DEF vWall Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 0.3
+          }
+          geometry Box {
+            size 0.015 0.065 0.8
+          }
+        }
+      ]
+      name "solid(3)"
+      boundingObject USE vWall
+      physics Physics {
+        density 100
+      }
+      linearVelocity 1.6858188568476223e-16 -3.7027447729015593e-08 9.4854266002613e-18
+      angularVelocity 4.2420844875637816e-16 2.1505677420842664e-17 -4.677906416314174e-15
+    }
+    DEF Pole MazeBlock {
+      translation -0.9049999999999252 -1.1475922236867109e-06 -0.5774999999999251
+      rotation -0.03738269760362224 0.79859138441884 -0.600711523654971 -3.755675880817699e-16
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.577499999999925 -1.1475922236936498e-06 -0.24749999999992495
+      rotation -0.7316012685769975 0.3772415210689672 0.5678454178718888 3.628930811103211e-16
+      name "maze block(20)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.41249999999992476 -1.1475922236867109e-06 -0.247499999999925
+      rotation 0.4412244078255443 0.2886730382044015 -0.8496992991363697 -5.438068270995707e-16
+      name "maze block(21)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.24749999999992495 -1.1475922236867109e-06 -0.247499999999925
+      rotation 0.6603529808143297 0.43953542923865374 0.6088863171180822 -2.1794001961475878e-16
+      name "maze block(22)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.08249999999992504 -1.1475922236867109e-06 -0.24749999999992503
+      rotation -0.6325468160139381 -0.6309122668194344 0.44925965446208493 -5.474975474438478e-16
+      name "maze block(23)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.247500000000075 -1.1475922236867109e-06 -0.24749999999992495
+      rotation -0.8013837166761797 0.5578307399186213 -0.21589118612883718 -6.58568288202481e-16
+      name "maze block(25)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.4125000000000752 -1.1475922236867109e-06 -0.247499999999925
+      rotation 0.4412244078255443 0.2886730382044015 -0.8496992991363697 -5.438068270995707e-16
+      name "maze block(26)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.5774999999999251 -1.1475922236936498e-06 -0.08249999999992497
+      rotation 0.5008924407408873 -0.7499648976366454 -0.43204098777950783 3.3191084735688263e-16
+      name "maze block(30)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.41249999999992465 -1.1475922236867109e-06 -0.08249999999992498
+      rotation -0.7680765666928031 0.4322945271433885 -0.4724191248237842 4.471862130024213e-16
+      name "maze block(31)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.24749999999992506 -1.1475922236936498e-06 -0.08249999999992498
+      rotation -0.14995630051475406 -0.9667886161208307 -0.2069610583542184 7.123354672079515e-16
+      name "maze block(32)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.08249999999992506 -1.1475922236867109e-06 -0.08249999999992497
+      rotation 0.13904270049955558 0.3483788198949466 -0.9269839940831749 -5.067869102519589e-16
+      name "maze block(33)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.08250000000007494 -1.1475922236867109e-06 -0.08249999999992497
+      rotation 0.13904270049955558 0.3483788198949466 -0.9269839940831749 -5.067869102519589e-16
+      name "maze block(34)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.2475000000000751 -1.1475922236867109e-06 -0.08249999999992508
+      rotation -0.586059048269405 -0.3150059760576079 -0.7465293209175061 -3.8533368542072863e-16
+      name "maze block(35)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.4125000000000753 -1.1475922236867109e-06 -0.08249999999992498
+      rotation -0.7680765666928031 0.4322945271433885 -0.4724191248237842 4.471862130024213e-16
+      name "maze block(36)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.577500000000075 -1.1475922236936498e-06 -0.08249999999992497
+      rotation 0.5008924407408873 -0.7499648976366454 -0.43204098777950783 3.3191084735688263e-16
+      name "maze block(37)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.5774999999999251 -1.1475922236936498e-06 0.08250000000007504
+      rotation 0.5008924407408873 -0.7499648976366454 -0.43204098777950783 3.3191084735688263e-16
+      name "maze block(40)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.41249999999992465 -1.1475922236867109e-06 0.08250000000007503
+      rotation -0.7680765666928031 0.4322945271433885 -0.4724191248237842 4.471862130024213e-16
+      name "maze block(41)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.24749999999992506 -1.1475922236936498e-06 0.08250000000007503
+      rotation -0.14995630051475406 -0.9667886161208307 -0.2069610583542184 7.123354672079515e-16
+      name "maze block(42)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.08249999999992506 -1.1475922236867109e-06 0.08250000000007504
+      rotation 0.13904270049955558 0.3483788198949466 -0.9269839940831749 -5.067869102519589e-16
+      name "maze block(43)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.08250000000007494 -1.1475922236867109e-06 0.08250000000007504
+      rotation 0.13904270049955558 0.3483788198949466 -0.9269839940831749 -5.067869102519589e-16
+      name "maze block(44)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.2475000000000751 -1.1475922236867109e-06 0.08250000000007493
+      rotation -0.586059048269405 -0.3150059760576079 -0.7465293209175061 -3.8533368542072863e-16
+      name "maze block(45)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.4125000000000753 -1.1475922236867109e-06 0.08250000000007503
+      rotation -0.7680765666928031 0.4322945271433885 -0.4724191248237842 4.471862130024213e-16
+      name "maze block(46)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.577499999999925 -1.1475922236867109e-06 0.2475000000000751
+      rotation -0.9111189788864626 -0.40539416298048975 0.07428175371003386 3.616086902650717e-16
+      name "maze block(50)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.41249999999992465 -1.1475922236867109e-06 0.24750000000007502
+      rotation 0.8529617170799886 0.2605639312441139 -0.4522861339136652 -3.711865503616958e-16
+      name "maze block(51)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.24749999999992509 -1.1475922236936498e-06 0.24750000000007497
+      rotation 0.183782470096573 -0.9807470626703502 0.06602425878934591 -3.6557367118168013e-16
+      name "maze block(52)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation -0.08249999999992504 -1.1475922236867109e-06 0.24750000000007502
+      rotation -0.7392043229200429 -0.6544407041514825 -0.15901048306961638 5.010030914102731e-16
+      name "maze block(53)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.08250000000007497 -1.1475922236867109e-06 0.24750000000007502
+      rotation -0.7392043229200429 -0.6544407041514825 -0.15901048306961638 5.010030914102731e-16
+      name "maze block(54)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.247500000000075 -1.147592223679772e-06 0.24750000000007502
+      rotation -0.7854321759885026 -0.02818268081874342 -0.6183057766379307 5.254234214001241e-16
+      name "maze block(55)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.4125000000000753 -1.1475922236867109e-06 0.24750000000007502
+      rotation 0.8529617170799886 0.2605639312441139 -0.4522861339136652 -3.711865503616958e-16
+      name "maze block(56)"
+      length 0.015
+    }
+    DEF Pole MazeBlock {
+      translation 0.5775000000000751 -1.1475922236867109e-06 0.2475000000000751
+      rotation -0.9111189788864626 -0.40539416298048975 0.07428175371003386 3.616086902650717e-16
+      name "maze block(57)"
+      length 0.015
+    }
+    DEF hBlock MazeBlock {
+      translation -0.6599999999996644 -1.071086099192764e-05 -0.5774999999905036
+      rotation -1.1505010375624149e-07 0.9999999999999932 -1.0336926193729766e-08 4.797606204749543e-09
+      name "maze block(10)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation 0.330000000000335 -1.071086099192764e-05 0.08250000000949669
+      rotation 6.934820299619557e-08 0.9999999999999977 -4.188770982855479e-09 4.7976061509680416e-09
+      name "maze block(62)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation 0.1650000000003353 -1.0710860991934579e-05 -0.08249999999050325
+      rotation 7.358700019203528e-08 0.9999999999999969 2.993630375789344e-08 4.797606134772613e-09
+      name "maze block(61)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation 0.1650000000003353 -1.0710860991934579e-05 0.08250000000949675
+      rotation 7.358700019203528e-08 0.9999999999999969 2.993630375789344e-08 4.797606134772613e-09
+      name "maze block(60)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation 0.330000000000335 -1.0710860991934579e-05 -0.24749999999050312
+      rotation -8.561002589855383e-09 0.9999999999999997 -2.2499613745370973e-08 4.79760618684546e-09
+      name "maze block(59)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation 0.49500000000033506 -1.0710860991934579e-05 -0.08249999999050332
+      rotation 4.0979818629222496e-08 0.999999999999999 -1.1696263755449274e-08 4.797606317789419e-09
+      name "maze block(58)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation 0.49500000000033495 -1.0710860991920701e-05 0.24750000000949682
+      rotation -3.2358467161255225e-08 0.9999999999999992 1.9527960976816472e-08 4.797606250814973e-09
+      name "maze block(39)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation 0.16500000000033527 -1.071086099192764e-05 0.24750000000949665
+      rotation 7.637845633843062e-08 0.9999999999999969 -1.2251388637102147e-08 4.797606040656157e-09
+      name "maze block(29)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation -0.9049999999905036 -1.071086099192764e-05 -0.33000000000033525
+      rotation 1.8748283223076472e-18 1 3.239892060994614e-17 1.5707996986971802
+      name "maze block(78)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation -0.4124999999905031 -1.071086099192764e-05 -3.3530585962824807e-13
+      rotation 9.867741679482436e-17 1 -7.465946417284225e-17 1.5707996986971806
+      name "maze block(65)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation 0.24750000000949673 -1.0710860991934579e-05 0.16499999999966483
+      rotation 1.2849165261767533e-16 1 -1.5412688539462103e-16 1.5707996986971806
+      name "maze block(64)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation -0.2474999999905034 -1.0710860991920701e-05 -3.3530183516010915e-13
+      rotation 2.694915806178191e-16 1 -1.7695991796404985e-16 1.5707996986971806
+      name "maze block(63)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation 0.2475000000094967 -1.0710860991934579e-05 -0.16500000000033524
+      rotation -3.846198274706287e-17 1 7.658738902453948e-17 1.570799698697181
+      name "maze block(49)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation 0.4125000000094966 -1.071086099192764e-05 -0.1650000000003352
+      rotation 2.870950193928774e-18 1 1.8512080899122224e-17 1.5707996986971802
+      name "maze block(11)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation 0.4125000000094969 -1.0710860991934579e-05 0.32999999999966484
+      rotation 2.3096884609688264e-16 1 -2.4298715046717807e-16 1.5707996986971806
+      name "maze block(48)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation -0.49499999999966504 -1.071086099192764e-05 -0.24749999999050337
+      rotation -3.897971249682463e-08 0.9999999999999991 -1.3006569586529384e-08 4.7976062137920054e-09
+      name "maze block(4)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation -0.6599999999996644 -1.071086099192764e-05 -0.08249999999050334
+      rotation -3.934184408324451e-08 0.9999999999999986 3.6092813134656415e-08 4.797606261031972e-09
+      name "maze block(6)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation 3.3526110801740594e-13 -1.071086099192764e-05 -0.08249999999050327
+      rotation 1.6955772031296183e-08 0.9999999999999998 -7.566704839521147e-09 4.797606149644067e-09
+      name "maze block(8)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation 3.3526110801740594e-13 -1.071086099192764e-05 0.08250000000949674
+      rotation 1.6955772031296183e-08 0.9999999999999998 -7.566704839521147e-09 4.797606149644067e-09
+      name "maze block(9)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation -0.329999999999665 -1.071086099192764e-05 0.08250000000949669
+      rotation 6.934820299619557e-08 0.9999999999999977 -4.188770982855479e-09 4.7976061509680416e-09
+      name "maze block(12)"
+      length 0.14
+    }
+    DEF hBlock MazeBlock {
+      translation -0.32999999999966495 -1.0710860991934579e-05 0.24750000000949676
+      rotation 2.826098197067696e-08 0.9999999999999996 -1.9122508318100286e-08 4.797606236056325e-09
+      name "maze block(13)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation -0.08249999999050339 -1.071086099192764e-05 0.32999999999966484
+      rotation 1.239771151924867e-16 1 -5.078378112308397e-17 1.5707996986971802
+      name "maze block(18)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation -0.08249999999050339 -1.071086099192764e-05 -0.3300000000003352
+      rotation 1.239771151924867e-16 1 -5.078378112308397e-17 1.5707996986971802
+      name "maze block(2)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation -0.08249999999050328 -1.071086099192764e-05 -3.3531573333567143e-13
+      rotation -7.522199924804009e-17 1 1.568129298486657e-16 1.570799698697181
+      name "maze block(17)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation -0.24749999999050323 -1.071086099192764e-05 -0.1650000000003352
+      rotation 2.040980074661265e-16 1 -2.22296775369077e-16 1.570799698697181
+      name "maze block(15)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation -0.5774999999905038 -1.0710860991941518e-05 0.32999999999966484
+      rotation 3.4922177618538577e-17 1 -3.335995316507207e-17 1.5707996986971806
+      name "maze block(1)"
+      length 0.14
+    }
+    DEF vBlock MazeBlock {
+      translation -0.5774999999905039 -1.0710860991934579e-05 0.1649999999996648
+      rotation 3.824891832152065e-16 1 -3.6289900876712378e-16 1.5707996986971806
+      name "maze block(3)"
+      length 0.14
+    }
+  ]
+}
+DEF z1234567 E-puck {
+  hidden position_0_0 6.201269598781602e-08
+  hidden position_0_1 8.159505783625695e-13
+  hidden rotation_1 -1 0 0 5.960464477539063e-08
+  translation -0.6599999998332441 -6.395852707992769e-05 -0.32999999990083306
+  rotation 2.9768731895402095e-06 0.9999999999955691 2.5688501260172108e-11 3.1415926498877362
+  controller "Phase_D"
+  turretSlot [
+    DistanceSensor {
+      rotation 0 1 0 -1.57
+      name "back_sensor"
+      lookupTable [
+        0 0 0
+        0.15 1000 0
+      ]
+    }
+    DistanceSensor {
+      name "right_sensor"
+      lookupTable [
+        0 0 0
+        0.15 1000 0
+      ]
+    }
+    DistanceSensor {
+      name "left_sensor"
+    }
+    DistanceSensor {
+      rotation 0 1 0 1.57
+      name "front_sensor"
+      lookupTable [
+        0 0 0
+        0.15 1000 0
+      ]
+    }
+    DEF Marker Solid {
+      translation 0 0.0001 -0.01
+      rotation 0 1 0 -0.7854003061004253
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColorMap ImageTexture {
+              url [
+                "marker1.png"
+              ]
+            }
+            roughness 1
+            metalness 0
+          }
+          geometry Plane {
+            size 0.02 0.02
+          }
+        }
+      ]
+      name "solid1"
+    }
+    DEF White Solid {
+      translation 0 0 -0.01
+      rotation 0 1 0 -0.7854003061004253
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColorMap ImageTexture {
+            }
+            roughness 1
+            metalness 0
+          }
+          geometry Plane {
+            size 0.025 0.025
+          }
+        }
+      ]
+      name "solid2"
+    }
+  ]
+  groundSensorsSlot [
+    InertialUnit {
+      rotation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.09
+      name "inertial_unit"
+    }
+  ]
+}
+DEF Target Transform {
+  translation 0 0.05 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "ladybug.png"
+          ]
+        }
+        metalness 0
+      }
+      geometry Plane {
+        size 0.165 0.165
+      }
+    }
+  ]
+}
+DEF Target_Fake Transform {
+  translation 0.33 0.05 -0.165
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "ladybug_fake.png"
+          ]
+        }
+        metalness 0
+      }
+      geometry Plane {
+        size 0.165 0.165
+      }
+    }
+  ]
+}

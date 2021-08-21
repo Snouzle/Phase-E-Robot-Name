@@ -1,11 +1,11 @@
 build/release/AutoMapBuilder.o: AutoMapBuilder.cpp AutoMapBuilder.hpp \
-  MapBuilder.hpp MotionStrategy.hpp PathPlanner.hpp \
-  /Applications/Webots.app/include/controller/cpp/webots/Robot.hpp \
-  /Applications/Webots.app/include/controller/cpp/webots/Motor.hpp \
-  /Applications/Webots.app/include/controller/cpp/webots/Device.hpp \
-  /Applications/Webots.app/include/controller/cpp/webots/../../c/webots/types.h \
-  /Applications/Webots.app/include/controller/cpp/webots/PositionSensor.hpp \
-  /Applications/Webots.app/include/controller/cpp/webots/DistanceSensor.hpp \
-  /Applications/Webots.app/include/controller/cpp/webots/Keyboard.hpp \
-  /Applications/Webots.app/include/controller/cpp/webots/InertialUnit.hpp \
-  RobotState.hpp MotionPlanRunner.hpp
+ MapBuilder.hpp MotionStrategy.hpp PathPlanner.hpp \
+ C:\Users\nickb\AppData\Local\Programs\Webots/include/controller/cpp/webots/Robot.hpp \
+ C:\Users\nickb\AppData\Local\Programs\Webots/include/controller/cpp/webots/Motor.hpp \
+ C:\Users\nickb\AppData\Local\Programs\Webots/include/controller/cpp/webots/Device.hpp \
+ C:/Users/nickb/AppData/Local/Programs/Webots/include/controller/c/webots/types.h \
+ C:\Users\nickb\AppData\Local\Programs\Webots/include/controller/cpp/webots/PositionSensor.hpp \
+ C:\Users\nickb\AppData\Local\Programs\Webots/include/controller/cpp/webots/DistanceSensor.hpp \
+ C:\Users\nickb\AppData\Local\Programs\Webots/include/controller/cpp/webots/Keyboard.hpp \
+ C:\Users\nickb\AppData\Local\Programs\Webots/include/controller/cpp/webots/InertialUnit.hpp \
+ RobotState.hpp MotionPlanRunner.hpp
