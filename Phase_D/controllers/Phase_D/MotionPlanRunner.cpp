@@ -12,15 +12,6 @@
  * MotionPlanRunner Constructor
  **/
 MotionPlanRunner::MotionPlanRunner(std::unique_ptr<Robot> &robot): MotionStrategy{robot} {
-	// Read Motion plan from file
-	// std::cout << PREFIX << "Reading in motion plan from " << MOTION_PLAN_FILE_NAME 
-	// 		  << "..." << std::endl;
-	// std::ifstream fd {MOTION_PLAN_FILE_NAME};
-	// std::string motionPlan;
-	// std::getline(fd, motionPlan);
-
-	// fd.close();
-
 	// Testing PathPlanner - To use this instead now 
 	std::cout << "Reading in Sasha's Phase B .. " << std::endl; 
 	std::string path_planner = getPath(); 
@@ -96,7 +87,7 @@ void MotionPlanRunner::replan() {
 	int pos = posPair.first * ROW + posPair.second;
 	int obstacle = getRow() * ROW + getCol();
 
-	std::string newPlan = getPath(pos, obstacle, getHeading(), "Map.txt");
+	std::string newPlan = getPath(pos, obstacle, getHeading());
 	mMotionPlan.str(newPlan.substr(3));
 	mMotionPlan.clear();
 	std::cout << newPlan.substr(3) << std::endl;
