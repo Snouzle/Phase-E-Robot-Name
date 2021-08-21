@@ -5,8 +5,9 @@
 #include <sstream>
 #include <fstream>
 
-const std::string MOTION_PLAN_FILE_NAME {"../../MotionPlan.txt"};
 const std::string MOTION_EXECUTION_FILE_NAME {"../../MotionExecution.csv"};
+
+const std::string MOTION_PLAN_FILE_NAME {"../../MotionPlan.txt"};
 
 
 // All the webots classes are defined in the "webots" namespace
